@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-caddy
+  namespace: dev
+  annotations:
+    kubernetes.io/ingress.class: caddy
+spec:
+  rules:
+  - host: <....lb.civo.com>
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: app
+            port:
+              number: 3000

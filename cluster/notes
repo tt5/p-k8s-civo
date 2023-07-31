@@ -1,0 +1,8 @@
+kubectl create namespace caddy-system
+
+helm install   --namespace=caddy-system   --repo https://caddyserver.github.io/ingress/   --atomic   mycaddy   caddy-ingress-controller --set ingressController.config.email=51215@gmx.ch
+
+kubectl get svc -n caddy-system -o json
+helm uninstall --namespace=caddy-system mycaddy
+
+yq -yi ".data.email = \"${MY_EMAIL}\"" ingress-configmap.yaml
