@@ -1,0 +1,4 @@
+http://localhost
+
+reverse_proxy /vite/* localhost:5173
+file_server

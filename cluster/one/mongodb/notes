@@ -1,0 +1,7 @@
+kubectl create secret generic mongo-uri --from-literal=MONGO_URI='<redacted>'
+kubectl get secret mongo-uri -o jsonpath='{.data.MONGO_URI}' | base64 --decode
+
+from other pod
+curl <podIP>.default.pod.cluster.local:3000
+curl -X POST <podIP>.default.pod.cluster.local:3000/todos -H "Content-Type: application/json" -d '{"title": "one"}'
+

@@ -1,0 +1,6 @@
+kubectl create namespace caddy-system
+helm install   --namespace=caddy-system   --repo https://caddyserver.github.io/ingress/ --set ingressController.config.email=51215@gmx.ch  --atomic   mycaddy   caddy-ingress-controller
+kubectl get svc -n caddy-system -o json
+#helm uninstall --namespace=caddy-system mycaddy
+
+k attach wolfi -i

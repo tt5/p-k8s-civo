@@ -1,0 +1,8 @@
+wget https://github.com/JuliaLang/julia/releases/download/v1.9.2/julia-1.9.2.tar.gz
+tar xzvf julia-1.9.2-linux-x86_64.tar.gz
+
+wget https://ziglang.org/download/0.10.1/zig-linux-x86_64-0.10.1.tar.xz
+
+http POST :2019/load Content-Type:application/json @caddy.json
+
+civo apikey add wolfi <api-key>

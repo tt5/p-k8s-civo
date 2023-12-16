@@ -1,19 +1,18 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: ingress-caddy
-  namespace: dev
+  name: ingress
   annotations:
     kubernetes.io/ingress.class: caddy
 spec:
   rules:
-  - host: <....lb.civo.com>
+  - host: tt15551.cc
     http:
       paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: app
+            name: fastify
             port:
-              number: 3000
+              number: 8000

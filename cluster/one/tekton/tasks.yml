@@ -1,0 +1,28 @@
+apiVersion: tekton.dev/v1
+kind: Task
+metadata:
+  name: task1
+spec:
+  workspaces:
+  - name: workspace
+  steps:
+  - name: step1
+    image: cgr.dev/chainguard/bash
+    script: |
+      echo "START"
+      touch /workspace/workspace/some
+      echo `date` >> /workspace/workspace/some
+---
+apiVersion: tekton.dev/v1
+kind: Task
+metadata:
+  name: task2
+spec:
+  workspaces:
+  - name: workspace
+  steps:
+  - name: step1
+    image: cgr.dev/chainguard/bash
+    script: |
+      cat /workspace/workspace/some
+      echo "THE END"

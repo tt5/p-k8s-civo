@@ -1,0 +1,22 @@
+tkn pipelinerun logs test
+tkn pipeline start test --use-pipelinerun test
+kubectl logs --selector=tekton.dev/taskRun=test-7ldtf-one
+k delete pod -l tekton.dev/pipeline=test
+k delete pipelinerun -l tekton.dev/pipeline=test
+
+kubectl create clusterrolebinding cluster_role_binding_myadmin --clusterrole=cluster-admin --serviceaccount=default:myadmin
+k delete pipelinerun -l tekton.dev/pipeline=kubectl
+
+tkn pipeline start kubectl --showlog --serviceaccount myadmin
+kubectl run wolfi --image=cgr.dev/chainguard/wolfi-base --restart=Never --command sleep -- 999d
+tkn pipeline start --workspace name=workspace,claimName=workspace test --showlog --serviceaccount myadmin
+
+tkn pipeline start wolfi --showlog --serviceaccount myadmin
+kubectl create secret generic my-github-ssh-credentials   --from-file=id_ed25519=/home/n/.ssh/id_ed25519   --from-file=known_hosts=/home/n/.ssh/known_hosts
+
+https://hub.tekton.dev/tekton/task/git-cli
+https://github.com/tektoncd/catalog/tree/main/task/git-clone/0.9/samples
+https://github.com/tektoncd/catalog/blob/main/task/cloudevent/0.1/samples/run.yaml
+https://github.com/tektoncd/catalog/blob/main/task/kaniko/0.6/kaniko.yaml
+https://tekton.dev/docs/how-to-guides/kaniko-build-push/
+

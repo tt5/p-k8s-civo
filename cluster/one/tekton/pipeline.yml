@@ -1,0 +1,29 @@
+apiVersion: tekton.dev/v1
+kind: Pipeline
+metadata:
+  name: wolfi-install
+spec:
+  workspaces:
+    - name: workspace
+  tasks:
+    - name: install
+      taskRef:
+        name: kubernetes-actions
+      params:
+        - name: script
+          value: |
+            kubectl exec wolfi -- apk add bash
+    - name: task1
+      taskRef:
+        name: task1
+      workspaces:
+        - name: workspace
+          workspace: workspace
+    - name: task2
+      taskRef:
+        name: task2
+      runAfter:
+        - task1
+      workspaces:
+        - name: workspace
+          workspace: workspace
