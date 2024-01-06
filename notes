@@ -1,9 +1,10 @@
 kubectl
-civo ctl
-npm i -g devspace
-civo kubernetes size
-civo kubernetes create -r "Traefik-v2-nodeport" -w -e "default-default" -n 1 -s "g4s.kube.large"
+x86-64
+arm64
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/arm64/kubectl"
 
-civo kubernetes config my-first-cluster -s
-civo kubernetes list -o json
-civo kubernetes remove my-cluster
+civo cli
+curl -sL https://civo.com/get | sh
+
+civo kubernetes size
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.13.3/cert-manager.yaml

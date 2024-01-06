@@ -4,17 +4,17 @@ metadata:
   name: my-git-clone
 spec:
   workspaces:
-    - name: workspace
+    - name: output
   params:
     - name: repo-url
       type: string
   tasks:
     - name: fetch-source
       taskRef:
-        name: my-git-clone
+        name: git-clone
       workspaces:
       - name: output
-        workspace: workspace
+        workspace: output
       params:
-      - name: repo-url
+      - name: url
         value: $(params.repo-url)

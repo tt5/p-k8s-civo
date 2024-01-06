@@ -3,7 +3,6 @@ kind: PipelineRun
 metadata:
   generateName: git-clone-run-
 spec:
-  serviceAccountName: myadmin
   pipelineRef:
     name: my-git-clone
   podTemplate:
@@ -11,8 +10,8 @@ spec:
       fsGroup: 65532
   params:
   - name: repo-url
-    value: git@github.com:tt5/p-website-chess.git
+    value: https://github.com/tt5/l-js-solidstart-chess.git
   workspaces:
-    - name: workspace
+    - name: output
       persistentVolumeClaim:
         claimName: workspace

@@ -36,5 +36,10 @@ spec:
             secretKeyRef:
               name: mongo-uri
               key: MONGO_URI
+        - name: POSTGRES_URL
+          valueFrom:
+            secretKeyRef:
+              name: pg-uri
+              key: PG_URI
         ports:
         - containerPort: 8000
