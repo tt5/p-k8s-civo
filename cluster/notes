@@ -5,36 +5,3 @@ curl -LO https://github.com/tektoncd/cli/releases/download/v0.31.2/tkn_0.31.2_Li
 sudo tar xvzf tkn_0.31.2_Linux_x86_64.tar.gz -C /usr/local/bin/ tkn
 
 tkn hub install task kubernetes-actions
-
-kubectl apply -f https://github.com/knative/serving/releases/download/knative-v1.11.0/serving-crds.yaml
-kubectl apply -f https://github.com/knative/serving/releases/download/knative-v1.11.0/serving-core.yaml
-
-kubectl patch configmap/config-network \
-  --namespace knative-serving \
-  --type merge \
-  --patch '{"data":{"ingress-class":"kourier.ingress.networking.knative.dev"}}'
-kubectl --namespace kourier-system get service kourier
-kubectl apply -f https://github.com/knative/serving/releases/download/knative-v1.11.0/serving-default-domain.yaml
-kubectl apply -f https://github.com/knative/eventing/releases/download/knative-v1.11.0/eventing-crds.yaml
-kubectl apply -f https://github.com/knative/eventing/releases/download/knative-v1.11.0/eventing-core.yaml
-kubectl apply -f https://github.com/knative/eventing/releases/download/knative-v1.11.0/in-memory-channel.yaml
-kubectl apply --filename https://github.com/knative-extensions/eventing-rabbitmq/releases/latest/download/rabbitmq-broker.yaml
-kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.12.0/cert-manager.yaml
-kubectl apply -f https://github.com/rabbitmq/cluster-operator/releases/latest/download/cluster-operator.yml
-kubectl apply -f https://raw.githubusercontent.com/rabbitmq/cluster-operator/main/docs/examples/hello-world/rabbitmq.yaml
-kubectl apply -f https://github.com/rabbitmq/messaging-topology-operator/releases/latest/download/messaging-topology-operator-with-certmanager.yaml
-kubectl get -o yaml rabbitmqclusters.rabbitmq.com hello-world
-kn service create cloudevents-player --image quay.io/ruben/cloudevents-player:latest
-
-kn source binding create ce-player-binding --subject "Service:serving.knative.dev/v1:cloudevents-player" --sink broker:example-broker
-
-curl -i http://cloudevents-player.default.${LOADBALANCER_IP}.sslip.io \
-    -H "Content-Type: application/json" \
-    -H "Ce-Id: 123456789" \
-    -H "Ce-Specversion: 1.0" \
-    -H "Ce-Type: some-type" \
-    -H "Ce-Source: command-line" \
-    -d '{"msg":"Hello CloudEvents!"}'
-
-curl http://cloudevents-player.default.${LOADBALANCER_IP}.sslip.io/messages
-kn trigger create cloudevents-trigger --sink cloudevents-player  --broker rabbitbroker

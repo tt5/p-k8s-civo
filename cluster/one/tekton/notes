@@ -14,3 +14,6 @@ kubectl create secret generic my-github-ssh-credentials   --from-file=id_ed25519
 
 https://github.com/tektoncd/catalog/tree/main/task/git-clone/0.9/samples
 https://github.com/tektoncd/catalog/blob/main/task/cloudevent/0.1/samples/run.yaml
+
+/root/.bashrc
+/root/.local/share/nvim

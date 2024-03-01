@@ -9,10 +9,27 @@ spec:
   - host: tt15551.cc
     http:
       paths:
-      - path: /
+      - path: /api
         pathType: Prefix
         backend:
           service:
             name: fastify
             port:
               number: 8000
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: solidstart
+            port:
+              number: 3000
+  - host: grafana.tt15551.cc
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: grafana-ext
+            port:
+              number: 3000

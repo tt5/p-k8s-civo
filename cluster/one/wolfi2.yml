@@ -4,9 +4,9 @@ metadata:
   name: wolfi2
 spec:
   volumes:
-  - name: storage
+  - name: hd1
     persistentVolumeClaim:
-      claimName: workspace
+      claimName: hd1
   containers:
   - name: wolfi
     image: cgr.dev/chainguard/wolfi-base 
@@ -16,5 +16,5 @@ spec:
     - containerPort: 80
       name: http
     volumeMounts:
-    - mountPath: "/home"
-      name: storage
+    - name: hd1
+      mountPath: "/home"

@@ -1,0 +1,10 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: grafana-ext
+spec:
+  type: ExternalName
+  externalName: grafana.grafana.svc.cluster.local
+  ports:
+    - port: 4000
+      targetPort: 3000

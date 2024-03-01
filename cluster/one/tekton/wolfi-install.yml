@@ -18,9 +18,10 @@ spec:
       params:
         - name: script
           value: |
-            kubectl exec wolfi -- apk add bash git make gcc build-base tmux curl jq yq python-3.11 py3.11-pip nodejs-20 vim libpq-14 postgresql-14 postgresql-14-client
+            kubectl exec wolfi -- apk add bash git tmux curl nodejs-20 vim
+            #kubectl exec wolfi -- apk add bash git make gcc build-base tmux curl jq yq python-3.11 py3.11-pip nodejs-20 vim libpq-14 postgresql-14 postgresql-14-client
             #kubectl exec wolfi -- python3.11 -m pip install httpie
-            kubectl exec wolfi -- wget https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz
-            kubectl exec wolfi -- tar xzf nvim-linux64.tar.gz
+            #kubectl exec wolfi -- wget https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz
+            #kubectl exec wolfi -- tar xzf nvim-linux64.tar.gz
             kubectl exec wolfi -- bash -c "echo -e \"PS1='$ '\\\nalias v='/nvim-linux64/bin/nvim'\\\nalias l='ls'\\\nalias k='kubectl'\\\nalias gs='git status'\\\nalias gam='git add . && git commit -m'\\\n\" > /root/.bashrc"
             kubectl exec wolfi -- bash -c "echo -e \"C-g: 'cd ..\\\015l\\\015'\" > /root/.inputrc"

@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: podman2
+spec:
+  volumes:
+  - name: hd1
+    persistentVolumeClaim:
+      claimName: hd1
+  initContainers:
+  - name: volumepermissions
+    image: busybox
+    imagePullPolicy: IfNotPresent
+    command: ["sh", "-c", "chmod 775 /home/podman && chown -R 1000 /home/podman"]
+    volumeMounts:
+    - name: hd1 
+      mountPath: /home/podman
+  containers:
+  - name: rootless
+    image: quay.io/podman/stable:v4.8.2
+    tty: true
+    stdin: true
+    securityContext:
+      privileged: true
+      runAsUser: 1000
+    volumeMounts:
+      - name: hd1
+        mountPath: /home/podman

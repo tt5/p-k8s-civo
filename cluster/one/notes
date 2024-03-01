@@ -4,3 +4,4 @@ kubectl get svc -n caddy-system -o json
 #helm uninstall --namespace=caddy-system mycaddy
 
 k attach wolfi -i
+k port-forward vault-0 8200:8200

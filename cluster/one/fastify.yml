@@ -41,5 +41,15 @@ spec:
             secretKeyRef:
               name: pg-uri
               key: PG_URI
+        - name: GITHUB_ID
+          valueFrom:
+            secretKeyRef:
+              name: oauth-github
+              key: GITHUB_ID
+        - name: GITHUB_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: oauth-github
+              key: GITHUB_SECRET
         ports:
         - containerPort: 8000

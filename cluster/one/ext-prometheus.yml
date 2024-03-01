@@ -1,0 +1,10 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: prometheus-ext
+spec:
+  type: ExternalName
+  externalName: prometheus.prometheus.svc.cluster.local
+  ports:
+    - port: 9090
+      targetPort: 9090
